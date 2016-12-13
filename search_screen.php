@@ -6,17 +6,18 @@ Utils::IdentityVerification();
 /**
  * Search screen
  */
-if (isset($_POST['search-screen'])) {
+if (isset($_POST['search-screen']) && $_SESSION['DBLP'] == $_POST['DBLP']) {
 
     $query_params = [];
     foreach ($_POST as $key => $value) {
-        if (!empty($value) || $key != "search-screan") {
+        if (!empty($value) && $value != "Recherche" && $key != "DBLP") {
             $query_params[] = "`" . $key . "` LIKE '%" . $value . "%'";
         }
     }
 
-    $search_query = "SELECT * FROM screen WHERE " . implode(" AND ", $query_params);
-
+    if (count($query_params) > 0) {
+        $search_query = "SELECT * FROM screen WHERE " . implode(" AND ", $query_params);
+    }
 }
 ?>
 
@@ -59,6 +60,7 @@ if (isset($_POST['search-screen'])) {
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <form action="<?php echo $action_link; ?>" method="post">
+                                <input type="hidden" name="DBLP" value="<?php echo $_SESSION['DBLP']; ?>">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <label>Modèle</label>
@@ -206,8 +208,6 @@ if (isset($_POST['search-screen'])) {
 
                         <div class="col-sm-12 col-md-12">
 
-                            <?php echo isset($search_query) ? $search_query : null; ?>
-
                             <table id="table-search"
                                    class="table table-bordered table-responsive table-striped table-condensed">
                                 <thead>
@@ -229,26 +229,29 @@ if (isset($_POST['search-screen'])) {
                                 <?php
 
                                 //Display all screen
-                                $data = $_DB->query("SELECT * FROM screen");
-                                while ($row = $data->fetch_object()) {
+                                if (isset($search_query)) {
+                                    $data = $_DB->query($search_query);
 
-                                    echo '<tr>';
-                                    echo '<td>' . $row->model . '</td>';
-                                    echo '<td>' . $row->size . '</td>';
-                                    echo '<td>' . $row->resolution . '</td>';
-                                    echo '<td>' . $row->revision . '</td>';
-                                    echo '<td>' . $row->finition . '</td>';
-                                    echo '<td>' . $row->technologie . '</td>';
-                                    echo '<td>' . $row->connector . '</td>';
-                                    echo '<td>' . $row->connector_position . '</td>';
-                                    echo '<td>' . $row->grade . '</td>';
-                                    if (!empty($row->image)) {
-                                        echo '<td><a href="' . Utils::rootpath() . '/' . $row->image . '" data-lightbox="' . $row->image . '"><img src="' . Utils::rootpath() . '/' . $row->image . '" height="50" /></a></td>';
-                                    } else {
-                                        echo '<td>&nbsp</td>';
+                                    while ($row = $data->fetch_object()) {
+
+                                        echo '<tr>';
+                                        echo '<td>' . $row->model . '</td>';
+                                        echo '<td>' . $row->size . '</td>';
+                                        echo '<td>' . $row->resolution . '</td>';
+                                        echo '<td>' . $row->revision . '</td>';
+                                        echo '<td>' . $row->finition . '</td>';
+                                        echo '<td>' . $row->technologie . '</td>';
+                                        echo '<td>' . $row->connector . '</td>';
+                                        echo '<td>' . $row->connector_position . '</td>';
+                                        echo '<td>' . $row->grade . '</td>';
+                                        if (!empty($row->image)) {
+                                            echo '<td><a href="' . Utils::rootpath() . '/' . $row->image . '" data-lightbox="' . $row->image . '"><img src="' . Utils::rootpath() . '/' . $row->image . '" height="50" /></a></td>';
+                                        } else {
+                                            echo '<td>&nbsp</td>';
+                                        }
+                                        echo '</tr>';
+
                                     }
-                                    echo '</tr>';
-
                                 }
 
                                 ?>
