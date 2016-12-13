@@ -27,6 +27,8 @@ class Utils
             ? $protocol = 'https://' : $protocol = 'http://';
     }
 
+
+
     /**
      * Affiche des informations lisibles pour une variable.
      *

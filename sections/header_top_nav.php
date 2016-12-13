@@ -14,10 +14,15 @@ require $_SERVER['DOCUMENT_ROOT'] . '/loader.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="<?php echo Utils::rootpath(); ?>/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?php echo Utils::rootpath(); ?>/dist/css/skins/skin-green.min.css">
+    <link rel="stylesheet" href="<?php echo Utils::rootpath(); ?>/plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?php echo Utils::rootpath(); ?>/plugins/lightbox2/css/lightbox.min.css">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- jQuery -->
+    <script src="<?php echo Utils::rootpath(); ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="<?php echo Utils::rootpath(); ?>/plugins/lightbox2/js/lightbox.min.js"></script>
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">

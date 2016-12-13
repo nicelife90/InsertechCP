@@ -5,10 +5,12 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="<?php echo Utils::rootpath(); ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
+
 <script src="<?php echo Utils::rootpath(); ?>/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo Utils::rootpath(); ?>/dist/js/app.min.js"></script>
 <script src="<?php echo Utils::rootpath(); ?>/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo Utils::rootpath(); ?>/plugins/fastclick/fastclick.min.js"></script>
+<script src="<?php echo Utils::rootpath(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo Utils::rootpath(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
 </body>
 </html>
